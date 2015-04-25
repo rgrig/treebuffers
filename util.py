@@ -1,4 +1,4 @@
-algorithms = ['naive', 'gc', 'amortized', 'best']
+algorithms = ['naive', 'gc', 'amortized', 'real-time']
 
 def posint(s):
   i = int(s)

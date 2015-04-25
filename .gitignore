@@ -1,5 +1,9 @@
-treebuffer.stats
+/datasets
+/logs
 /main
+/plots
+__pycache__
+treebuffer.stats
 
 # Object files
 *.o

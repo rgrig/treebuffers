@@ -7,3 +7,9 @@ If anything would go wrong, you might need to start over.
 Alternatively, say `make`, run `ledit ./main`, type `help`, and explore.
 
 If you want to see the implementation, start with the file `treebuffer.h`.
+
+### Requirements
+
+Python 3, recent gcc; ledit is convenient.
+The development is being done on Ubuntu, with no testing whatsoever on other platforms.
+If you run into trouble, call us.

@@ -26,6 +26,7 @@ def prof_stop(kind):
   global Ta, Tb
   sys.stderr.write('{:5.01f} {:5.01f} {}\n'.format(
     perf_counter() - Ta, process_time() - Tb, kind))
+  sys.stderr.flush()
   Ta, Tb = None, None
 
 argparser = ArgumentParser(description='''\
@@ -178,6 +179,7 @@ def main():
   naive_summary = summarize_log('naive')
   for h in range(1, args.history + 1):
     sys.stderr.write('HISTORY {}\n'.format(h))
+    sys.stderr.flush()
     summaries[h]['naive'] = naive_summary
     for a in args.algorithm[1:]:
       run(h, a)
