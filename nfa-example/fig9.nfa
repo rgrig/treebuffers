@@ -1,0 +1,27 @@
+# Finds two 'a's that are k=10 non-spaces appart. The 'a's and the spaces are
+# relevant. Note that a deterministic automaton has Θ(2^k) states.
+
+start 1 relevant 'a'
+9 error relevant 'a'
+
+1 1 relevant ' \n'
+2 2 relevant ' \n'
+3 3 relevant ' \n'
+4 4 relevant ' \n'
+5 5 relevant ' \n'
+6 6 relevant ' \n'
+7 7 relevant ' \n'
+8 8 relevant ' \n'
+9 9 relevant ' \n'
+
+1 2 irrelevant other
+2 3 irrelevant other
+3 4 irrelevant other
+4 5 irrelevant other
+5 6 irrelevant other
+6 7 irrelevant other
+7 8 irrelevant other
+8 9 irrelevant other
+
+start start irrelevant 'a'
+start start irrelevant other

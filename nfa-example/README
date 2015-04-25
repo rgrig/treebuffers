@@ -1,0 +1,5 @@
+The files fig1b.* correspond to Figure 1b in the paper. The automaton is in
+fig1b.nfa. The sequence of tree buffer operations is in fig1b.tb: it can
+be obtained from fig1b.nfa and cabbcab.text by using ./monitor.py. The
+script fig1b.tb can be processed by ../main, which produces verbose logs
+in ./treebuffer.stats.

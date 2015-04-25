@@ -1,0 +1,14 @@
+# The NFA is described by a list of transitions, one per line:
+#   transition ::= start target type chars '\n'
+#   type ::= 'relevant' | 'irrelevant'
+#   chars ::= 'other' | string_literal
+# There are two special state names: "start" and "error".
+# The keyword 'other' refers to letters that do not appear on other transitions
+# outgoing from the same source. The string_literal uses Python conventions.
+start start relevant 'a'
+start 2 relevant "a"
+2 start relevant 'b'
+2 error relevant 'b'
+start start irrelevant 'bc'
+2 2 irrelevant 'ac'
+error error irrelevant other

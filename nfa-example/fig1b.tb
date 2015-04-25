@@ -1,0 +1,30 @@
+initialize 10 naive 0:-1
+add_child 0 1:1
+add_child 0 2:1
+deactivate 0
+add_child 2 0:2
+add_child 2 3:2
+deactivate 2
+add_child 0 2:5
+add_child 0 4:5
+add_child 1 5:5
+add_child 1 6:5
+deactivate 0
+deactivate 1
+add_child 4 0:6
+add_child 4 1:6
+add_child 6 7:6
+add_child 6 8:6
+deactivate 4
+deactivate 6
+deactivate 0
+deactivate 2
+deactivate 5
+deactivate 7
+history 8
+deactivate 8
+history 1
+deactivate 1
+history 3
+deactivate 3
+# done
