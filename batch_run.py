@@ -175,17 +175,21 @@ def main():
     partial(summarize_log, args.points, args.step_bin, args.node_bin, outdir)
   run = partial(run, args.executable, args.data, args.keep_history)
   summaries = [{} for _ in range(args.history + 1)]
-  run(args.history, 'naive')
-  naive_summary = summarize_log('naive')
+  naive_summary = None
+  if 'naive' in args.algorithm:
+    run(args.history, 'naive')
+    naive_summary = summarize_log('naive')
   for h in range(1, args.history + 1):
     sys.stderr.write('HISTORY {}\n'.format(h))
     sys.stderr.flush()
     summaries[h]['naive'] = naive_summary
-    for a in args.algorithm[1:]:
+    for a in args.algorithm:
+      if a == 'naive':
+        continue
       run(h, a)
       summaries[h][a] = summarize_log('{}-{}'.format(a, h))
   prof_start()
-  for a in algorithms:
+  for a in args.algorithm:
     keys = sorted(summaries[1][a].keys())
     for k in keys:
       with Path(outdir, '{}-{}.json'.format(a, k)).open('w') as out:
