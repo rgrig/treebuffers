@@ -1,3 +1,6 @@
+treebuffer.stats
+/main
+
 # Object files
 *.o
 *.ko

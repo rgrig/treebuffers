@@ -137,7 +137,8 @@ void delete(Tree * t) {
   }
 
   // Cleanup.
-  while (t->to_delete->rl != t->to_delete) delete_one(t);
+  t->algo = tb_real_time, M;
+  while ((MMM, t->to_delete->rl != t->to_delete)) delete_one(t);
   print_statistic(t, "TF %d\n", t->mems);
   t->mems = 0;
   free(t->active);

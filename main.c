@@ -6,6 +6,7 @@
 #include <string.h>
 #include "treebuffer.h"
 
+// TODO: get rid of these limits
 #define buffer_size (1 << 10)
 #define active_size (1 << 20)
 #define children_size (1 << 20)
@@ -26,10 +27,14 @@ void reset() {
   memset(active, 0, sizeof(active));
 }
 
-// TODO: don't exit on these errors (annoying for interactive use)
 int check_node_id_range(int node_id) {
   if (0 <= node_id && node_id < active_size) return 1;
-  fprintf(stderr, "W: node id outside [0.. %d).\n", active_size);
+  fprintf(stderr, "W: node id outside [0..%d).\n", active_size);
+  if (active_size <= node_id) {
+    fprintf(stderr, "W: You may want to increase active_size and recompile.\n");
+  } else {
+    fprintf(stderr, "W: Please use nonnegative IDs.\n");
+  }
   return 0;
 }
 
@@ -60,8 +65,8 @@ Node * get_old_node(int node_id) {
 }
 
 void remove_old_node(int node_id) {
-  check_node_id_range(node_id);
-  check_node_id_is_old(node_id);
+  assert (check_node_id_range(node_id));
+  assert (check_node_id_is_old(node_id));
   active[node_id] = 0;
 }
 
@@ -140,8 +145,8 @@ void do_initialize(const char * p) {
     fprintf(stderr, "W: Cannot parse history. Ignoring %s.\n", p);
     return;
   }
-  if (history < 0) {
-    fprintf(stderr, "W: Negative history (%d) ignored.\n", history);
+  if (history <= 0) {
+    fprintf(stderr, "W: History must be posiitve.\n");
     return;
   }
   if (history >= children_size) {
@@ -223,7 +228,7 @@ void do_expand(const char * p) {
   p += n;
   i = 0;
   for (i = 0; i < children_size && parse_node(&p, &children_id[i], &children_data[i]); ++i);
-  if (i >= children_size) {
+  if (i == children_size) {
     fprintf(stderr, "W: Too many children. Increase children_size and recompile.\n");
   }
   int bad = 0;
@@ -236,8 +241,8 @@ void do_expand(const char * p) {
   }
   Node * parent = get_old_node(parent_id);
   if (!parent) fprintf(stderr, "W: Invalid parent id.\n");
-  if (i >= children_size || bad > 0 || !parent) {
-    for (int j = 0; j < i; ++ j) if (!children_id[j]) {
+  if (i == children_size || bad > 0 || !parent) {
+    for (int j = 0; j < i; ++j) if (children[j]) {
       remove_old_node(children_id[j]);
     }
     return;
@@ -272,7 +277,7 @@ void print_help() {
   printf("  expand PARENT_ID NEW_ID1[:NEW_DATA1] NEW_ID2[:NEW_DATA2] ...\n");
   printf("  history NODE_ID\n");
   printf("  help\n");
-  printf("  morehelp\n");
+  printf("HISTORY is a positive integer\n");
   printf("ALGORITHM is one of: naive gc amortized real-time\n");
   printf("IDs and DATA are integers\n");
 }
