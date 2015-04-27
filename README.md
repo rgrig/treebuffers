@@ -5,7 +5,7 @@ This code was used to perform the experiments in
 Run `./reproduce-cav2015.py`, wait a few weeks, then look in the directory `plots/`.
 If anything would go wrong, you might need to start over.
 Alternatively, say `make`, run `ledit ./main`, type `help`, and explore.
-See the [blog post](http://rgrig.blogspot.co.uk/2015/04/tree-buffers.html)
+See the [blog post](http://rgrig.blogspot.com/2015/04/tree-buffers.html)
   for an interactive explanation.
 
 If you want to see the implementation, start with the file `treebuffer.h`.
